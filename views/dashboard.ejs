@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Dashboard</title>
+</head>
+<body class="bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">🗂️ Task Manager</a>
+      <span class="navbar-text text-light">Simple and Efficient Task Tracking</span>
+      <a href="/logout" class="btn btn-outline-light ms-auto">Logout</a>
+    </div>
+  </nav>
+  <div class="container py-5">
+    <form method="POST" action="/add-task" class="mb-4">
+      <div class="row g-2">
+        <div class="col-md-4">
+          <input type="text" name="title" class="form-control" placeholder="Task Title" required />
+        </div>
+        <div class="col-md-6">
+          <input type="text" name="description" class="form-control" placeholder="Description" required />
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-primary w-100">Add Task</button>
+        </div>
+      </div>
+    </form>
+    <ul class="list-group">
+  <% for(let task of tasks){%>
+    <li class="list-group-item">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-start gap-2">
+        <!-- LEFT SIDE: Task Content -->
+        <div class="text-break">
+          <strong><%= task.title %></strong>: <%= task.description %>
+        </div>
+
+        <!-- RIGHT SIDE: Buttons -->
+        <div class="d-flex gap-2">
+          <a href="/edit-task/<%= task._id %>" class="btn btn-warning btn-sm">Edit</a>
+          <form action="/delete-task/<%= task._id %>" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </div>
+      </div>
+    </li>
+  <% } %>
+</ul>
+
+  </div>
+  <footer class="bg-primary text-white text-center py-3 mt-5 fixed-bottom">
+    <small>© 2025 Task Manager | Built with ❤️ by Sohail</small>
+  </footer>
+</body>
+</html>
